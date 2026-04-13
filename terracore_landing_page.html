@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TerraCore Robotics</title>
+  <meta name="description" content="TerraCore Robotics builds rugged autonomous systems for terrain, infrastructure, and environmental work." />
+  <style>
+    :root {
+      --green-light: #97c11f;
+      --green-mid: #5f9f2a;
+      --green-dark: #1f6c3c;
+      --text: #184f30;
+      --muted: #4f775e;
+      --line: rgba(31,108,60,.12);
+      --bg: #f8fbf7;
+      --card: #ffffff;
+      --shadow: 0 18px 50px rgba(31,108,60,.08);
+      --radius: 26px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(151,193,31,.16), transparent 26%),
+        radial-gradient(circle at top right, rgba(31,108,60,.10), transparent 28%),
+        linear-gradient(180deg, #fbfdf9 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(calc(100% - 28px), var(--max)); margin: 0 auto; }
+
+    .logo-word {
+      display: inline-block;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      line-height: .95;
+      background: linear-gradient(90deg, var(--green-light) 0%, var(--green-mid) 48%, var(--green-dark) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo-sub {
+      display: block;
+      font-weight: 600;
+      letter-spacing: .42em;
+      color: var(--green-dark);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(248,251,247,.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .brand .logo-word { font-size: clamp(1.5rem, 4vw, 1.95rem); }
+    .brand .logo-sub { font-size: .54rem; }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: 700;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--green-light), var(--green-mid) 52%, var(--green-dark));
+      color: white;
+      box-shadow: 0 14px 28px rgba(31,108,60,.18);
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--green-dark);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 34px 0 18px;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: .88rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--green-light), var(--green-dark));
+      box-shadow: 0 0 0 5px rgba(95,159,42,.12);
+    }
+
+    h1 {
+      margin: 16px 0 14px;
+      font-size: clamp(2.7rem, 10vw, 5.9rem);
+      letter-spacing: -0.065em;
+      line-height: .92;
+      max-width: 10.2ch;
+      color: var(--green-dark);
+    }
+
+    .hero h1 .logo-word {
+      display: inline;
+    }
+
+    .lede {
+      margin: 0 0 22px;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      background: rgba(255,255,255,.86);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.02rem;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: .83rem;
+      line-height: 1.45;
+    }
+
+    .hero-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.84));
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      overflow: hidden;
+      min-height: 420px;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -20% auto auto -10%;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(151,193,31,.18), transparent 65%);
+      pointer-events: none;
+    }
+
+    .device {
+      position: relative;
+      height: 100%;
+      min-height: 384px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(151,193,31,.08), rgba(31,108,60,.05)),
+        linear-gradient(180deg, #ffffff, #f2f8f1 100%);
+      border: 1px solid rgba(31,108,60,.10);
+      overflow: hidden;
+    }
+
+    .device::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(31,108,60,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31,108,60,.055) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.85));
+    }
+
+    .shape {
+      position: absolute;
+      inset: 14% 10% 18% 10%;
+      display: grid;
+      place-items: center;
+    }
+
+    .continuous-mark {
+      width: min(100%, 360px);
+      aspect-ratio: 1;
+      border-radius: 30%;
+      background: linear-gradient(135deg, var(--green-light) 0%, var(--green-mid) 48%, var(--green-dark) 100%);
+      clip-path: path("M 240 35 C 310 35 360 75 360 135 L 360 185 C 360 220 347 250 319 278 L 214 383 C 200 397 177 397 163 383 L 58 278 C 30 250 17 220 17 185 L 17 135 C 17 75 67 35 137 35 Z");
+      position: relative;
+      box-shadow: 0 26px 52px rgba(31,108,60,.20);
+    }
+
+    .continuous-mark::before {
+      content: "";
+      position: absolute;
+      inset: 19% 22% 19% 22%;
+      background: white;
+      border-radius: 28% 28% 36% 36%;
+      clip-path: polygon(50% 0%, 84% 17%, 100% 48%, 87% 84%, 50% 100%, 13% 84%, 0% 48%, 16% 17%);
+    }
+
+    .continuous-mark::after {
+      content: "";
+      position: absolute;
+      width: 28%;
+      height: 42%;
+      right: 16%;
+      bottom: 9%;
+      background: linear-gradient(135deg, var(--green-light), var(--green-dark));
+      border-radius: 80% 18% 76% 18%;
+      transform: rotate(18deg);
+      box-shadow: inset 0 0 0 10px rgba(255,255,255,.86);
+      opacity: .98;
+    }
+
+    .floating-card {
+      position: absolute;
+      background: rgba(255,255,255,.94);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 18px;
+      padding: 12px 14px;
+      max-width: 210px;
+      z-index: 2;
+    }
+
+    .floating-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--green-dark);
+      font-size: .92rem;
+    }
+
+    .floating-card span {
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.45;
+    }
+
+    .fc-1 { top: 18px; right: 16px; }
+    .fc-2 { left: 16px; bottom: 18px; }
+
+    section {
+      padding: 28px 0;
+    }
+
+    .section-head {
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      letter-spacing: -0.05em;
+      color: var(--green-dark);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      max-width: 72ch;
+    }
+
+    .cards {
+      display: grid;
+      gap: 14px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--green-light), var(--green-dark));
+      margin-bottom: 16px;
+      box-shadow: 0 16px 30px rgba(31,108,60,.14);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.12rem;
+      color: var(--green-dark);
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .band {
+      background: linear-gradient(135deg, rgba(151,193,31,.12), rgba(31,108,60,.08));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .band-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .band .logo-word { font-size: clamp(2rem, 7vw, 3.2rem); }
+    .band .logo-sub { font-size: .7rem; margin-top: 8px; }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .cta {
+      text-align: center;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      padding: 34px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta p {
+      margin: 12px auto 22px;
+      max-width: 42rem;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    footer {
+      padding: 20px 0 36px;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .footer-row {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    @media (min-width: 760px) {
+      .nav-links { display: flex; }
+      .hero { padding: 56px 0 26px; }
+      .hero-grid { grid-template-columns: 1.06fr .94fr; gap: 30px; }
+      .cards { grid-template-columns: repeat(3, 1fr); }
+      .band-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+      .footer-row { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="brand" aria-label="TerraCore Robotics home">
+        <span class="logo-word">TERRACORE</span>
+        <span class="logo-sub">ROBOTICS</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#platform">Platform</a>
+        <a href="#mission">Mission</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a href="#contact" class="btn btn-primary">Talk to us</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Rugged autonomy for terrain, infrastructure, and environmental work</div>
+          <h1><span class="logo-word">TerraCore</span> builds robots for the physical world.</h1>
+          <p class="lede">
+            TerraCore Robotics develops field systems for rough terrain, outdoor operations, and high-friction environmental work. The brand language mirrors the product thesis: simple, durable, and engineered to scale.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Request intro</a>
+            <a class="btn btn-secondary" href="#platform">View platform</a>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <strong>Terrain-first</strong>
+              <span>Designed for uneven ground, weather, debris, and off-path work.</span>
+            </div>
+            <div class="metric">
+              <strong>Modular</strong>
+              <span>Perception, payloads, and mobility systems built to swap fast.</span>
+            </div>
+            <div class="metric">
+              <strong>Long arc</strong>
+              <span>From field operations today to large-scale environmental systems tomorrow.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="device">
+            <div class="floating-card fc-1">
+              <strong>Identity direction</strong>
+              <span>Single continuous shape. Two greens. Slightly rounded industrial typography.</span>
+            </div>
+            <div class="shape">
+              <div class="continuous-mark" aria-hidden="true"></div>
+            </div>
+            <div class="floating-card fc-2">
+              <strong>Product cue</strong>
+              <span>Minimal mark system suitable for robot chassis, app icon, deck, and hardware labeling.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="platform">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Simple identity. Serious robotics.</h2>
+          <p>
+            The landing page uses the same visual system as the wordmark: rounded geometry, a green gradient from light to dark, and restrained spacing that feels more deployable than decorative.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">01</div>
+            <h3>Field robotics</h3>
+            <p>
+              Outdoor systems for inspection, forest maintenance, environmental response, and terrain-heavy operational workflows.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">02</div>
+            <h3>Perception and execution</h3>
+            <p>
+              Vision-guided detection tied to practical action: marking, logging, spraying, or simple intervention in real terrain.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">03</div>
+            <h3>Planetary direction</h3>
+            <p>
+              The long-term thesis is broader environmental and infrastructure transformation, but the company starts with narrow, fundable systems.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mission">
+      <div class="wrap">
+        <div class="band">
+          <div class="band-grid">
+            <div>
+              <span class="logo-word">TERRACORE</span>
+              <span class="logo-sub">ROBOTICS</span>
+            </div>
+            <ul class="list">
+              <li>Build robots that operate where standard automation breaks down.</li>
+              <li>Target hard terrain, outdoor labor, and environmental maintenance first.</li>
+              <li>Use real deployments to grow into larger-scale land and infrastructure systems.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Why this style works</h2>
+          <p>
+            It stays consistent with the logo direction you chose: same green family, no navy, gentle roundness, and a cleaner industrial tone that can survive on a robot body, investor deck, or landing page without feeling over-designed.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">A</div>
+            <h3>Brand coherence</h3>
+            <p>The wordmark and site feel like the same company, not two separate design experiments.</p>
+          </article>
+          <article class="card">
+            <div class="icon">B</div>
+            <h3>Funding-ready</h3>
+            <p>Minimal, credible, and clean enough to support a serious early-stage robotics pitch.</p>
+          </article>
+          <article class="card">
+            <div class="icon">C</div>
+            <h3>Extensible</h3>
+            <p>The same visual system can map onto GaiaCore or GaiaForm with almost no redesign work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="cta">
+          <span class="logo-word">TERRACORE</span>
+          <span class="logo-sub">ROBOTICS</span>
+          <p>
+            Rugged autonomous systems for difficult terrain, real field work, and long-horizon environmental infrastructure.
+          </p>
+          <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
+            <a class="btn btn-primary" href="mailto:founders@terracore.com">founders@terracore.com</a>
+            <a class="btn btn-secondary" href="#">Canopy sprint deck</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div>© 2026 TerraCore Robotics</div>
+      <div>Single-file landing page styled to match the selected wordmark direction.</div>
+    </div>
+  </footer>
+</body>
+</html>
