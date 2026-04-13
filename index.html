@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TerraCore Robotics</title>
-  <meta name="description" content="TerraCore Robotics builds rugged autonomous systems for terrain, infrastructure, and environmental work." />
+  <meta name="description" content="TerraCore Robotics builds rugged autonomous systems for terrain, infrastructure, and environmental operations." />
   <style>
     :root {
       --green-light: #97c11f;
@@ -87,6 +87,12 @@
       gap: 24px;
       color: var(--muted);
       font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .btn {
@@ -414,6 +420,59 @@
       line-height: 1.72;
     }
 
+    .cta-actions {
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .team-wrap {
+      display: grid;
+      gap: 18px;
+    }
+
+    .team-card {
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .team-grid {
+      display: grid;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .team-photo {
+      width: min(100%, 280px);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: #eef5ec;
+    }
+
+    .team-name {
+      margin: 0 0 4px;
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      letter-spacing: -0.03em;
+    }
+
+    .team-title {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .social-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
     footer {
       padding: 20px 0 36px;
       color: var(--muted);
@@ -434,6 +493,7 @@
       .hero-grid { grid-template-columns: 1.06fr .94fr; gap: 30px; }
       .cards { grid-template-columns: repeat(3, 1fr); }
       .band-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+      .team-grid { grid-template-columns: 300px 1fr; }
       .footer-row { flex-direction: row; justify-content: space-between; align-items: center; }
     }
   </style>
@@ -441,7 +501,7 @@
 <body>
   <header>
     <div class="wrap nav">
-      <a href="#" class="brand" aria-label="TerraCore Robotics home">
+      <a href="#" class="brand" aria-label="TerraCore Robotics Home">
         <span class="logo-word">TERRACORE</span>
         <span class="logo-sub">ROBOTICS</span>
       </a>
@@ -450,9 +510,13 @@
         <a href="#platform">Platform</a>
         <a href="#mission">Mission</a>
         <a href="#contact">Contact</a>
+        <a href="#team">Team</a>
       </nav>
 
-      <a href="#contact" class="btn btn-primary">Talk to us</a>
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-primary">Contact</a>
+        <a href="#team" class="btn btn-secondary">Team</a>
+      </div>
     </div>
   </header>
 
@@ -463,7 +527,7 @@
           <div class="eyebrow">Rugged autonomy for terrain, infrastructure, and environmental work</div>
           <h1><span class="logo-word">TerraCore</span> builds robots for the physical world.</h1>
           <p class="lede">
-            TerraCore Robotics develops field systems for rough terrain, outdoor operations, and high-friction environmental work. The brand language mirrors the product thesis: simple, durable, and engineered to scale.
+            TerraCore Robotics develops deployable systems for rough terrain, outdoor operations, and high-friction environmental work.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">Request intro</a>
@@ -507,9 +571,6 @@
       <div class="wrap">
         <div class="section-head">
           <h2>Simple identity. Serious robotics.</h2>
-          <p>
-            The landing page uses the same visual system as the wordmark: rounded geometry, a green gradient from light to dark, and restrained spacing that feels more deployable than decorative.
-          </p>
         </div>
 
         <div class="cards">
@@ -533,7 +594,7 @@
             <div class="icon">03</div>
             <h3>Planetary direction</h3>
             <p>
-              The long-term thesis is broader environmental and infrastructure transformation, but the company starts with narrow, fundable systems.
+              The long-term thesis is broader environmental and infrastructure transformation, starting with practical systems deployed today.
             </p>
           </article>
         </div>
@@ -563,25 +624,25 @@
         <div class="section-head">
           <h2>Why this style works</h2>
           <p>
-            It stays consistent with the logo direction you chose: same green family, no navy, gentle roundness, and a cleaner industrial tone that can survive on a robot body, investor deck, or landing page without feeling over-designed.
+            The identity is clear, practical, and consistent across hardware labels, product surfaces, and investor materials.
           </p>
         </div>
 
         <div class="cards">
           <article class="card">
             <div class="icon">A</div>
-            <h3>Brand coherence</h3>
-            <p>The wordmark and site feel like the same company, not two separate design experiments.</p>
+            <h3>Built for the field</h3>
+            <p>Every design choice supports real deployment conditions: rough terrain, weather, and daily operational use.</p>
           </article>
           <article class="card">
             <div class="icon">B</div>
-            <h3>Funding-ready</h3>
-            <p>Minimal, credible, and clean enough to support a serious early-stage robotics pitch.</p>
+            <h3>Credibility</h3>
+            <p>Our team brings practical engineering and operating experience, with support from Founders Inc.'s Canopy program.</p>
           </article>
           <article class="card">
             <div class="icon">C</div>
             <h3>Extensible</h3>
-            <p>The same visual system can map onto GaiaCore or GaiaForm with almost no redesign work.</p>
+            <p>Our systems are designed to be modular and scalable, allowing for easy integration into existing workflows and environments.</p>
           </article>
         </div>
       </div>
@@ -595,11 +656,91 @@
           <p>
             Rugged autonomous systems for difficult terrain, real field work, and long-horizon environmental infrastructure.
           </p>
-          <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
-            <a class="btn btn-primary" href="mailto:founders@terracore.com">founders@terracore.com</a>
-            <a class="btn btn-secondary" href="#">Canopy sprint deck</a>
+          <div class="hero-actions cta-actions">
+            <a class="btn btn-primary" href="mailto:info@terracorerobotics.com">info@terracorerobotics.com</a>
+            <a class="btn btn-secondary" href="#" aria-label="Read the TerraCore whitepaper">Read whitepaper</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="wrap team-wrap">
+        <div class="section-head">
+          <h2>Team</h2>
+          <p>Builders shipping practical robotics systems for the real world.</p>
+        </div>
+        <article class="team-card">
+          <div class="team-grid">
+            <img
+              class="team-photo"
+              src="https://placehold.co/480x480/png?text=Jesse+Pepper"
+              alt="Jesse Pepper headshot"
+            />
+            <div>
+              <h3 class="team-name">Jesse Pepper</h3>
+              <p class="team-title">Founder & CEO</p>
+              <div class="social-buttons">
+                <a class="btn btn-secondary" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a class="btn btn-secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-grid">
+            <img
+              class="team-photo"
+              src="https://placehold.co/480x480/png?text=Jamie+Kielb"
+              alt="Jamie Kielb headshot"
+            />
+            <div>
+              <h3 class="team-name">Jamie Kielb</h3>
+              <p class="team-title">CMO</p>
+              <div class="social-buttons">
+                <a class="btn btn-secondary" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a class="btn btn-secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-grid">
+            <img
+              class="team-photo"
+              src="https://placehold.co/480x480/png?text=Jude+Pepper"
+              alt="Jude Pepper headshot"
+            />
+            <div>
+              <h3 class="team-name">Jude Pepper</h3>
+              <p class="team-title">Mechanical Engineer</p>
+              <div class="social-buttons">
+                <a class="btn btn-secondary" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a class="btn btn-secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-grid">
+            <img
+              class="team-photo"
+              src="https://placehold.co/480x480/png?text=Jalal+Slava"
+              alt="Jalal Slava headshot"
+            />
+            <div>
+              <h3 class="team-name">Jalal Slava</h3>
+              <p class="team-title">Software Engineer</p>
+              <div class="social-buttons">
+                <a class="btn btn-secondary" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a class="btn btn-secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
   </main>
@@ -607,7 +748,7 @@
   <footer>
     <div class="wrap footer-row">
       <div>© 2026 TerraCore Robotics</div>
-      <div>Single-file landing page styled to match the selected wordmark direction.</div>
+      <div>Built for field-ready robotics systems.</div>
     </div>
   </footer>
 </body>
